@@ -31,7 +31,7 @@ const bbams = 'https://www.billboard.com/bbmasvote#';
     await page.waitForSelector(buttons[2], { hidden: true });
 
     // authenticate my choice with facebook account
-    await page.type("#email", config.username, { delay: 30 });
+    await page.type("#email", config.email, { delay: 30 });
     await page.type("#pass", config.password, { delay: 30 });
     await page.click("#loginbutton");
 
