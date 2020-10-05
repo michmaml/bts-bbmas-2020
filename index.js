@@ -16,42 +16,27 @@ const bbams = 'https://www.billboard.com/bbmasvote#';
     await page.click('.billboard-embed-close');
     await page.waitForSelector('.billboard-embed-close', { hidden: true });
 
-    //await page.reload({ waitUntil: 'load', timeout: 0 });
-    /* await page.evaluate(() => {
-      location = location;
-    }); */
-
     const buttons = ['li[title="TOP SOCIAL ARTIST"]', '.btn-vote', '.btn-default'];
 
-    /* await page.evaluate(() => {
-      document.querySelector('view-landing-category').click();
-    }); */
-    /* await page.waitForSelector('.two-col', { timeout: 60000 });
+    // choose the right category
     await page.click(buttons[0]);
-    await page.waitForSelector(buttons[0], { hidden: true }); */
+    await page.waitForSelector(buttons[0], { hidden: true });
 
-    /* await page.click(buttons[1]);
+    // choose the right band - beloved BTS
+    await page.click(buttons[1]);
     await page.waitForSelector(buttons[1], { hidden: true });
 
+    // yes, of course I confirm I want them to win
     await page.click(buttons[2]);
-    await page.waitForSelector(buttons[2], { hidden: true }); */
+    await page.waitForSelector(buttons[2], { hidden: true });
 
+    // authenticate my choice with facebook account
+    await page.type("#email", config.username, { delay: 30 });
+    await page.type("#pass", config.password, { delay: 30 });
+    await page.click("#loginbutton");
 
-
-    await page.screenshot({ path: `bbams.png` })
-
-    const websiteContent = await page.content();
-
-    //console.log(websiteContent);
-
-    const file = fs.createWriteStream('url_list.log');
-    const pathName = file.path;
-    file.write(websiteContent);
-    file.on('error', (err) => {
-      console.error(`There is an error writing the file ${pathName} => ${err}`)
-    });
-    file.end();
-
+    await page.waitForSelector('.choice-confirmation', { visible: true });
+    // at this point it is safe to close the browser bc puppeteer voted for us
 
     browser.close();
   } catch (err) {
