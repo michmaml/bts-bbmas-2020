@@ -1,0 +1,14 @@
+{
+  "name": "quick-bts",
+  "version": "1.0.0",
+  "description": "bbmas 2020",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mjs",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^5.3.1"
+  }
+}
